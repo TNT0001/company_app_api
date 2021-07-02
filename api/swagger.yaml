@@ -1,0 +1,274 @@
+swagger: "2.0"
+info:
+  description: "go api"
+  version: "1.0.0"
+  title: ""
+  termsOfService: ""
+host: "localhost:5000"
+basePath: /api/
+schemes:
+  - "http"
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+tags:
+  # - name: "Health Check"
+  - name: "App"
+    description: Api for app
+  - name: "Web"
+    description: Api for web
+
+paths:
+  # /health_check:
+  #   get:
+  #     tags:
+  #       - "Health Check"
+  #     summary: "Health Check"
+  #     description: "Health Check"
+  #     produces:
+  #       - "application/json"
+  #     responses:
+  #       200:
+  #         description: Returns uid
+  #         schema:
+  #           properties:
+  #             status:
+  #               type: integer
+  #               example: 200
+  #             result:
+  #               type: object
+  #               properties:
+  #                 message:
+  #                   type: string
+  #                   example: "Health check OK!"
+  #             error:
+  #               example: null
+  /app/login:
+    post:
+      tags:
+        - "App"
+      summary: "Login"
+      description: "Login"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: id
+          in: formData
+          required: true
+          type: string
+        - name: password
+          in: formData
+          required: true
+          type: string
+      responses:
+        200:
+          description: Returns uid
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 200
+              result:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    example: "1KoYg02dqOTQ6KM1oNkDC8Db5ZK2"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6ImhhZHV5YW5oYmtobjJAZ21haWwuY29tIiwiZXhwIjoxNTk3MTMzMzUzfQ"
+              error:
+                example: null
+        400:
+          description: Bad request
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 400
+              result:
+                example: null
+              error:
+                $ref: "#/definitions/Error"
+  /web/login:
+    post:
+      tags:
+        - "Web"
+      summary: "Login"
+      description: "Login"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: id
+          in: formData
+          required: true
+          type: string
+        - name: password
+          in: formData
+          required: true
+          type: string
+      responses:
+        200:
+          description: Returns uid
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 200
+              result:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    example: "1KoYg02dqOTQ6KM1oNkDC8Db5ZK2"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJlbWFpbCI6ImhhZHV5YW5oYmtobjJAZ21haWwuY29tIiwiZXhwIjoxNTk3MTMzMzUzfQ"
+              error:
+                example: null
+        400:
+          description: Bad request
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 400
+              result:
+                example: null
+              error:
+                $ref: "#/definitions/Error"
+  /web/register_member:
+    post:
+      tags:
+        - "Web"
+      summary: "Register member"
+      description: "Register member"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      parameters:
+        - name: email
+          in: formData
+          required: true
+          type: string
+        - name: password
+          in: formData
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Returns uid"
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 200
+              result:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    example: "1KoYg02dqOTQ6KM1oNkDC8Db5ZK2"
+              error:
+                example: null
+        400:
+          description: "Bad request"
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 400
+              result:
+                example: null
+              error:
+                $ref: "#/definitions/Error"
+  /app/user/profile:
+    get:
+      tags:
+        - "App"
+      summary: "User Profile"
+      description: "User Profile"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+      security:
+        - Bearer: []
+      parameters:
+        - name: uid
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: "Returns User Profile"
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 200
+              result:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    example: "1KoYg02dqOTQ6KM1oNkDC8Db5ZK2"
+                  user:
+                    $ref: "#/definitions/User"
+              error:
+                example: null
+        400:
+          description: "Bad request"
+          schema:
+            properties:
+              status:
+                type: integer
+                example: 400
+              result:
+                example: null
+              error:
+                $ref: "#/definitions/Error"
+definitions:
+  Error:
+    properties:
+      errorCode:
+        type: integer
+        example: 400
+      errorMessage:
+        type: string
+        example: "Bad request"
+  InternalServerError:
+    properties:
+      errorCode:
+        type: integer
+        example: 500
+      errorMessage:
+        type: string
+        example: "Internal Server Error"
+  User:
+    properties:
+      img:
+        type: string
+        example: "test.jpg"
+      name:
+        type: string
+        example: "Yukiko"
+      use_start_date:
+        type: string
+        example: "2020-4-1"
+      email:
+        type: string
+        example: "yukiko@email.com"
+      birthday:
+        type: string
+        example: "1988-4-10"
+      learning_purpose:
+        type: integer
+        example: 1

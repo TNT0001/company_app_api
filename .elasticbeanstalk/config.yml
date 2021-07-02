@@ -1,0 +1,20 @@
+branch-defaults:
+  develop:
+    environment: go-dev
+    group_suffix: null
+  feature/sprint4:
+    environment: go-api-dev-env
+global:
+  application_name: go-api
+  branch: null
+  default_ec2_keyname: go-dev
+  default_platform: Go 1 running on 64bit Amazon Linux 2
+  default_region: ap-northeast-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  repository: null
+  sc: git
+  workspace_type: Application

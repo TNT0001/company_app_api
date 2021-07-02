@@ -1,0 +1,73 @@
+# go-api
+Bài tập golang cơ bản: yêu cầu các bạn tạo branch mới để làm. Tên branch theo định dang feature/tên/bài. Vd: feature/lannt/bai1
+
+Bài 1. Tạo 1 api update thông tin user
+    - url : api/app/user/update
+    - requets:
+       username string
+       email string,
+       birthday datetime
+       image_url string
+       password string
+    - Response: thông tin user vừa update
+    - Yêu cầu email update không được trùng với các email đã đăng kí, password không được trùng với password đã đăng kí
+
+Bài 2: (estimate 2 ngày)
+   1. Tạo bảng projects với các trường như sau:
+      id: int, PRIMARY KEY
+      name: string, 255
+      category: string, enum('client','non-billable','system'), not null, default = 'client'
+      projected_spend: int ,not null, default = 0,
+      projected_variance: int, not null, default = 0,
+      revenue_recognised: int ,not null, default = 0,
+      created_at: datetime
+      updated_at: datetime
+      deleted_at: datetime
+   2. Tạo bảng projects_user với các trường như sau:
+      id: int, PRIMARY KEY
+      project_id: int, not null, unsigned
+      user_id: int, not null, unsigned
+      created_at: datetime
+      updated_at: datetime
+      deleted_at: datetime
+   3. Tạo 1 api lấy danh sách project theo userID
+      - url : api/app/projects/{user_id}
+      - requets:
+         userId string
+      - response: list projects của user đó (sử dụng preload gorm)
+Bài 3: Thêm chức năng insert project (estimate 2 ngày)
+   - url : api/app/projects/create
+   - requets:
+      name: string, required, tối đa 255 kí tự
+      category: string, required, chỉ nhận 1 trong 3 giá trị 'client','non-billable','system'
+      projected_spend: int, required khi truyền param
+      projected_variance: int, 
+      revenue_recognised: int,
+   - response: thông tin project vừa insert
+Bài 4: (estimate 1 ngày)
+   1. Thêm điều kiện validate cho api update user. validate mình dùng github.com/go-playground/validator/v10
+      username : string, required, tối đa 16 kí tự
+      email : đúng định dạng email, required,
+      birthday : datetime, not required
+      image_url : string, not required, định dạng url (custom)
+      password : string, required, min = 6, max = 10 (phải có cả chữ hoa lẫn chữ thường và số)
+   2. Trong api get user Profile, response trả về thêm danh sách các project của user theo định dạng: 
+      http://jsoneditoronline.org/#left=local.fenuzu&right=local.haquxa
+   3. Sử dụng hash cho password
+Bài 5: (estimate 1 ngày)   
+   Xuất csv file chứa dữ liệu projects của user_id chuyền lên.
+Bai 6: (estimate 2 ngày)
+   Thêm trường company_id (int) vào bảng user và thêm bẳng company gồm 
+      - id: int, PRIMARY KEY
+      - name: string, not null
+      - created_at: datetime
+      - updated_at: datetime
+      - deleted_at: datetime
+   Lấy những projects của company gửi lên:
+   	- url : api/app/componies/projects
+   	- requets:
+   		name: string, required, max 255
+   	- response: tên company và projects của nó.
+   viết test case api
+Bài 7: (estimate 2 ngày)
+   Viết test case cho api thêm project ở bài tập 3

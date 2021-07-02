@@ -1,0 +1,1 @@
+web: ./application -dirConfig /var/app/current/configs -logOutput $LOGGER_OUTPUT -logFormat $LOGGER_FORMAT -logLocation $LOGGER_LOCATION -env $ENVIRONMENT -port $PORT -workdir $WORKDIR -dbHost $MYSQL_HOST -dbName $MYSQL_DATABASE  -dbPort $MYSQL_PORT -dbUser $MYSQL_USER -dbPass $MYSQL_PASSWORD

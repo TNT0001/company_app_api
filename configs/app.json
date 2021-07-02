@@ -1,0 +1,22 @@
+{
+    "version": "v1",
+    "flags": {
+        "logger": {
+            "level": "logLevel",
+            "output": "logOutput",
+            "format": "logFormat",
+            "location": "logLocaltion"
+        },
+        "database": {
+            "port": "dbPort",
+            "name": "dbName",
+            "host": "dbHost",
+            "user": "dbUser",
+            "pass": "dbPass"
+        },
+        "smtp": {
+            "host": "smtp.gmail.com",
+            "port": 587
+        }
+    }
+}

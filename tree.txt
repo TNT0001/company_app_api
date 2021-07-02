@@ -1,0 +1,47 @@
+.
+├── Makefile
+├── api
+│   └── swagger.yaml
+├── build
+│   ├── api
+│   │   └── Dockerfile
+│   └── nginx
+│       ├── Dockerfile
+│       └── conf
+│           └── nginx.conf.template
+├── cmd
+│   └── api
+│       ├── api.go
+│       └── tmp
+│           ├── runner-build
+│           └── runner-build-errors.log
+├── configs
+│   └── app.json
+├── deployments
+│   └── docker-compose.yml
+├── go.mod
+├── go.sum
+├── internal
+│   ├── api
+│   │   └── router
+│   │       └── router.go
+│   └── pkg
+│       ├── domain
+│       │   ├── domain_model
+│       │   │   ├── dto
+│       │   │   └── entity
+│       │   └── service
+│       ├── handler
+│       ├── repository
+│       └── usecase
+├── pkg
+│   ├── infrastructure
+│   └── shared
+│       ├── auth
+│       ├── middleware
+│       ├── test
+│       ├── utils
+│       └── validator
+└── tree.txt
+
+30 directories, 14 files
